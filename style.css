@@ -1,0 +1,797 @@
+/* ============================================
+   産後ドゥーラ ウェブサイト スタイルシート
+   ピンク水彩画風デザイン
+   ============================================ */
+
+:root {
+    /* カラーパレット - やわらかいピンク系 */
+    --pink-lightest: #fff5f8;
+    --pink-light: #ffe4ed;
+    --pink-soft: #ffccd9;
+    --pink-medium: #f8a5b8;
+    --pink-accent: #e8789a;
+    --pink-dark: #c95d7a;
+    
+    /* テキストカラー */
+    --text-primary: #4a3a3f;
+    --text-secondary: #6b5a60;
+    --text-light: #8a7a80;
+    
+    /* その他 */
+    --white: #ffffff;
+    --cream: #fffbf7;
+    --shadow-soft: rgba(200, 150, 160, 0.15);
+    --shadow-medium: rgba(200, 150, 160, 0.25);
+    
+    /* フォント */
+    --font-primary: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'BIZ UDGothic', sans-serif;
+    --font-accent: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--text-primary);
+    background: var(--cream);
+    line-height: 1.8;
+    font-size: 16px;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ============================================
+   水彩ブロブ（装飾）
+   ============================================ */
+
+.watercolor-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(ellipse, var(--pink-soft) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    animation: float 15s ease-in-out infinite;
+}
+
+.blob-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(ellipse, var(--pink-light) 0%, transparent 70%);
+    bottom: -50px;
+    left: -80px;
+    animation: float 18s ease-in-out infinite reverse;
+}
+
+.blob-3 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(ellipse, #fde4cf 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: float 12s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(20px, -20px) scale(1.05); }
+    66% { transform: translate(-15px, 15px) scale(0.95); }
+}
+
+/* ============================================
+   ヒーローセクション
+   ============================================ */
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--pink-lightest) 0%, var(--cream) 50%, var(--pink-light) 100%);
+    overflow: hidden;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 1;
+    padding: 40px;
+}
+
+.greeting {
+    font-family: var(--font-accent);
+    font-size: 1.5rem;
+    color: var(--pink-accent);
+    margin-bottom: 24px;
+    letter-spacing: 0.3em;
+}
+
+.hero h1 {
+    font-family: var(--font-accent);
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    letter-spacing: 0.15em;
+}
+
+.name {
+    font-family: var(--font-accent);
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: var(--pink-dark);
+    margin-bottom: 48px;
+    letter-spacing: 0.2em;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 16px 48px;
+    background: linear-gradient(135deg, var(--pink-medium) 0%, var(--pink-accent) 100%);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    box-shadow: 0 8px 32px var(--shadow-medium);
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px var(--shadow-medium);
+}
+
+.cta-button.large {
+    padding: 20px 64px;
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   セクション共通
+   ============================================ */
+
+section {
+    padding: 80px 0;
+}
+
+section:nth-child(even) {
+    background: var(--white);
+}
+
+section:nth-child(odd) {
+    background: var(--pink-lightest);
+}
+
+h2 {
+    font-family: var(--font-accent);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 400;
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 48px;
+    letter-spacing: 0.15em;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--pink-soft), var(--pink-accent));
+    margin: 24px auto 0;
+    border-radius: 2px;
+}
+
+/* ============================================
+   お祝いメッセージ
+   ============================================ */
+
+.congratulations h2 {
+    line-height: 1.6;
+}
+
+.message-card {
+    background: var(--white);
+    padding: 48px;
+    border-radius: 24px;
+    box-shadow: 0 8px 40px var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+.message-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--pink-soft), var(--pink-accent), var(--pink-soft));
+}
+
+.message-card p {
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+}
+
+.message-card p:last-child {
+    margin-bottom: 0;
+}
+
+.highlight {
+    color: var(--pink-dark) !important;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   産後ドゥーラとは
+   ============================================ */
+
+.about-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-content p {
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+}
+
+.about-content strong {
+    color: var(--pink-dark);
+}
+
+.motto {
+    font-family: var(--font-accent);
+    font-size: 1.4rem;
+    color: var(--pink-accent) !important;
+    margin-top: 40px !important;
+    margin-bottom: 8px !important;
+}
+
+.motto-sub {
+    font-size: 1rem;
+    color: var(--text-light) !important;
+}
+
+/* ============================================
+   経歴
+   ============================================ */
+
+.career-list {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.career-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 20px 24px;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px var(--shadow-soft);
+}
+
+.career-item .dot {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    background: var(--pink-accent);
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.career-item p {
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   得意なこと
+   ============================================ */
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.skill-card {
+    background: var(--pink-lightest);
+    padding: 32px 24px;
+    border-radius: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+}
+
+.skill-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.skill-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   保有資格
+   ============================================ */
+
+.qualification-list {
+    list-style: none;
+    max-width: 400px;
+    margin: 0 auto 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.qualification-list li {
+    padding: 16px 24px;
+    background: var(--white);
+    border-radius: 12px;
+    text-align: center;
+    color: var(--text-secondary);
+    box-shadow: 0 2px 12px var(--shadow-soft);
+    position: relative;
+    padding-left: 48px;
+}
+
+.qualification-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 20px;
+    color: var(--pink-accent);
+    font-weight: bold;
+}
+
+.qualifications .note {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    background: var(--pink-light);
+    padding: 16px;
+    border-radius: 12px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   お料理
+   ============================================ */
+
+.cooking-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cooking-content p {
+    margin-bottom: 16px;
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   サポート内容
+   ============================================ */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.service-item {
+    background: var(--white);
+    padding: 28px;
+    border-radius: 16px;
+    border-left: 4px solid var(--pink-accent);
+    box-shadow: 0 4px 20px var(--shadow-soft);
+}
+
+.service-item h3 {
+    font-family: var(--font-accent);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.service-item p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.services-note {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+/* ============================================
+   ご利用の流れ
+   ============================================ */
+
+.flow-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 48px;
+}
+
+.step {
+    flex: 1;
+    min-width: 180px;
+    max-width: 220px;
+    background: var(--white);
+    padding: 32px 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 6px 24px var(--shadow-soft);
+}
+
+.step-number {
+    display: inline-block;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, var(--pink-soft), var(--pink-medium));
+    color: var(--white);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+}
+
+.step h3 {
+    font-family: var(--font-accent);
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.step p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.step-arrow {
+    font-size: 2rem;
+    color: var(--pink-medium);
+    align-self: center;
+    margin-top: 40px;
+}
+
+.flow .cta-button {
+    display: block;
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .step-arrow {
+        display: none;
+    }
+    
+    .step {
+        max-width: 100%;
+    }
+}
+
+/* ============================================
+   サポート時間
+   ============================================ */
+
+.schedule-content {
+    text-align: center;
+    background: var(--white);
+    padding: 48px;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px var(--shadow-soft);
+}
+
+.schedule-content .days {
+    font-family: var(--font-accent);
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.schedule-content .time {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--pink-dark);
+    margin-bottom: 16px;
+}
+
+.schedule-content .note {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   ご予約状況
+   ============================================ */
+
+.availability-status {
+    text-align: center;
+    background: linear-gradient(135deg, var(--pink-light), var(--pink-soft));
+    padding: 40px;
+    border-radius: 24px;
+}
+
+.availability-status p {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+/* ============================================
+   ご利用料金
+   ============================================ */
+
+.pricing-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.price-card {
+    flex: 1;
+    min-width: 260px;
+    max-width: 320px;
+    background: var(--white);
+    padding: 40px 32px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 8px 32px var(--shadow-soft);
+    transition: transform 0.3s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-5px);
+}
+
+.price-card.featured {
+    background: linear-gradient(135deg, var(--pink-lightest), var(--white));
+    border: 2px solid var(--pink-medium);
+}
+
+.price-card h3 {
+    font-family: var(--font-accent);
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.price-card .price {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--pink-dark);
+}
+
+.price-card .price span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-light);
+}
+
+.price-card .note {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.pricing-notes {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.pricing-notes p {
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.payment-title {
+    font-family: var(--font-accent);
+    font-size: 1.2rem;
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+}
+
+.payment-methods {
+    background: var(--pink-lightest);
+    padding: 32px;
+    border-radius: 20px;
+}
+
+.payment-methods p {
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.payment-methods p:first-child {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+/* ============================================
+   助成金・保険
+   ============================================ */
+
+.subsidy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.subsidy-card {
+    background: var(--white);
+    padding: 36px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 6px 24px var(--shadow-soft);
+}
+
+.subsidy-card h3 {
+    font-family: var(--font-accent);
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.subsidy-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+/* ============================================
+   お問い合わせ
+   ============================================ */
+
+.contact {
+    background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink-soft) 100%) !important;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.contact h2::after {
+    background: var(--white);
+}
+
+/* ============================================
+   フッター
+   ============================================ */
+
+.footer {
+    position: relative;
+    background: var(--pink-lightest);
+    padding: 40px 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.blob-footer-1 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(ellipse, var(--pink-soft) 0%, transparent 70%);
+    bottom: -50px;
+    right: -50px;
+}
+
+.blob-footer-2 {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(ellipse, var(--pink-light) 0%, transparent 70%);
+    top: -30px;
+    left: 20%;
+}
+
+.footer p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   レスポンシブ対応
+   ============================================ */
+
+@media (max-width: 640px) {
+    section {
+        padding: 60px 0;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+        margin-bottom: 36px;
+    }
+    
+    .message-card {
+        padding: 32px 24px;
+    }
+    
+    .schedule-content {
+        padding: 32px 24px;
+    }
+    
+    .price-card {
+        min-width: 100%;
+    }
+    
+    .cta-button {
+        padding: 14px 36px;
+    }
+    
+    .cta-button.large {
+        padding: 16px 48px;
+    }
+}
+
+/* ============================================
+   アニメーション
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content {
+    animation: fadeInUp 1s ease-out;
+}
+
+section .container {
+    animation: fadeInUp 0.8s ease-out;
+}
+
