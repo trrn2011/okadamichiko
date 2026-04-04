@@ -789,7 +789,8 @@ a {
 /* AM / PM slots inside each day cell */
 .cal-slots {
     display: flex;
-    gap: 4px;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .cal-slot {
@@ -882,7 +883,7 @@ a {
     }
 
     .cal-slots {
-        gap: 2px;
+        gap: 1px;
     }
 
     .avail-legend {
