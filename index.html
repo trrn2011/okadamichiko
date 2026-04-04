@@ -6,121 +6,92 @@
     <title>認定産後ドゥーラ 岡田みちこ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <!-- ヒーローセクション -->
     <header class="hero">
-        <div class="watercolor-blob blob-1"></div>
-        <div class="watercolor-blob blob-2"></div>
-        <div class="watercolor-blob blob-3"></div>
-        
+        <div class="hero-orb hero-orb--1"></div>
+        <div class="hero-orb hero-orb--2"></div>
+        <div class="hero-orb hero-orb--3"></div>
+
         <div class="hero-content">
-            <p class="greeting">こんにちは</p>
-            <h1>認定産後ドゥーラ</h1>
-            <p class="name">岡田みちこ</p>
-            <a href="https://www.instagram.com/" target="_blank" class="cta-button">ご連絡はこちら</a>
+            <p class="hero-greeting animate-on-scroll">こんにちは</p>
+            <p class="hero-title animate-on-scroll" data-delay="1">認定産後ドゥーラ</p>
+            <h1 class="hero-name animate-on-scroll" data-delay="2">岡田みちこ</h1>
+            <div class="hero-line animate-on-scroll" data-delay="3"></div>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="btn animate-on-scroll" data-delay="4">ご連絡はこちら</a>
+        </div>
+
+        <div class="hero-scroll-hint" aria-hidden="true">
+            <span></span>
         </div>
     </header>
 
     <!-- お祝いメッセージ -->
-    <section class="congratulations">
-        <div class="container">
-            <h2>ご懐妊・ご出産<br>おめでとうございます</h2>
-            <div class="message-card">
+    <section class="section section--warm" id="message">
+        <div class="container container--narrow">
+            <h2 class="section-heading animate-on-scroll">
+                ご懐妊・ご出産<br>おめでとうございます
+            </h2>
+            <div class="message-card animate-on-scroll">
                 <p>新しい命の誕生、心よりお祝い申し上げます。</p>
-                <p>産前産後の心細い時、体が辛い時、どうぞ一人で抱え込まないでくださいね。</p>
-                <p class="highlight">お母さんの笑顔と安心を守るため、心を込めてサポートさせていただきます。</p>
+                <p>産前産後の心細い時、体が辛い時、<br class="hide-mobile">どうぞ一人で抱え込まないでくださいね。</p>
+                <p class="message-highlight">お母さんの笑顔と安心を守るため、<br class="hide-mobile">心を込めてサポートさせていただきます。</p>
             </div>
         </div>
     </section>
 
     <!-- 経歴 -->
-    <section class="career">
+    <section class="section" id="career">
         <div class="container">
-            <h2>経歴</h2>
-            <div class="career-list">
-                <div class="career-item">
-                    <span class="dot"></span>
+            <h2 class="section-heading animate-on-scroll">経歴</h2>
+            <div class="timeline">
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
                     <p>4人の子どもの母（男の子2人・女の子2人）として、賑やかな子育てを経験</p>
                 </div>
-                <div class="career-item">
-                    <span class="dot"></span>
+                <div class="timeline-item animate-on-scroll" data-delay="1">
+                    <div class="timeline-dot"></div>
                     <p>幼稚園で10年間勤務し、たくさんのお子様の成長を見守ってきました</p>
                 </div>
-                <div class="career-item">
-                    <span class="dot"></span>
+                <div class="timeline-item animate-on-scroll" data-delay="2">
+                    <div class="timeline-dot"></div>
                     <p>学童保育で3年間、小学生のお子様と楽しい時間を過ごしました</p>
                 </div>
-                <div class="career-item">
-                    <span class="dot"></span>
+                <div class="timeline-item animate-on-scroll" data-delay="3">
+                    <div class="timeline-dot"></div>
                     <p>ベビーシッターとして、さまざまなご家庭をサポート</p>
                 </div>
-                <div class="career-item">
-                    <span class="dot"></span>
+                <div class="timeline-item animate-on-scroll" data-delay="4">
+                    <div class="timeline-dot"></div>
                     <p>海外での出産・子育て経験があり、国際的な視点も持ち合わせています</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- サポート時間 -->
-    <section class="schedule">
-        <div class="container">
-            <h2>サポート時間</h2>
-            <div class="schedule-content">
-                <p class="days">月、火、水、木、金</p>
-                <p class="time">9:00〜17:00</p>
-                <p class="note">＊その他時間帯は、ご相談ください。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ご利用料金 -->
-    <section class="pricing">
-        <div class="container">
-            <h2>ご利用料金</h2>
-            <div class="pricing-cards">
-                <div class="price-card">
-                    <h3>産後プランニング</h3>
-                    <p class="price">2,000円<span>/1回</span></p>
-                </div>
-                <div class="price-card featured">
-                    <h3>ドゥーラサポート</h3>
-                    <p class="price">3,000円<span>/1時間</span></p>
-                </div>
-            </div>
-            <div class="pricing-notes">
-                <p>・往復交通費は別途頂戴いたします。</p>
-            </div>
-            
-            <h3 class="payment-title">お支払い方法</h3>
-            <div class="payment-methods">
-                <p>現金、銀行振り込みがご利用出来ます。</p>
-            </div>
-        </div>
-    </section>
-
     <!-- 得意なこと -->
-    <section class="skills">
+    <section class="section section--warm" id="skills">
         <div class="container">
-            <h2>得意なこと</h2>
+            <h2 class="section-heading animate-on-scroll">得意なこと</h2>
             <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">🍚</div>
+                <div class="skill-card animate-on-scroll">
+                    <span class="skill-icon" aria-hidden="true">🍚</span>
                     <p>和食中心の、体にやさしいお料理をお作りします。</p>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">📖</div>
+                <div class="skill-card animate-on-scroll" data-delay="1">
+                    <span class="skill-icon" aria-hidden="true">📖</span>
                     <p>学童保育の経験を活かして、工作や絵本の読み聞かせが得意です。</p>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">👶</div>
+                <div class="skill-card animate-on-scroll" data-delay="2">
+                    <span class="skill-icon" aria-hidden="true">👶</span>
                     <p>乳幼児から小学生まで、幅広い年齢のお子様に対応できます。</p>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🌏</div>
+                <div class="skill-card animate-on-scroll" data-delay="3">
+                    <span class="skill-icon" aria-hidden="true">🌏</span>
                     <p>海外での出産・子育て経験あり。海外赴任予定のご家庭のご相談にも乗れます。</p>
                 </div>
             </div>
@@ -128,93 +99,158 @@
     </section>
 
     <!-- 保有資格 -->
-    <section class="qualifications">
-        <div class="container">
-            <h2>保有資格</h2>
-            <ul class="qualification-list">
-                <li>保育士</li>
-                <li>幼稚園教諭</li>
-                <li>救命救急技能認定</li>
-                <li>放課後児童支援員</li>
+    <section class="section" id="qualifications">
+        <div class="container container--narrow">
+            <h2 class="section-heading animate-on-scroll">保有資格</h2>
+            <ul class="qual-list">
+                <li class="animate-on-scroll">保育士</li>
+                <li class="animate-on-scroll" data-delay="1">幼稚園教諭</li>
+                <li class="animate-on-scroll" data-delay="2">救命救急技能認定</li>
+                <li class="animate-on-scroll" data-delay="3">放課後児童支援員</li>
             </ul>
         </div>
     </section>
 
     <!-- サポート内容 -->
-    <section class="services">
+    <section class="section section--warm" id="services">
         <div class="container">
-            <h2>サポート内容</h2>
+            <h2 class="section-heading animate-on-scroll">サポート内容</h2>
             <div class="services-grid">
-                <div class="service-item">
+                <div class="service-card animate-on-scroll">
                     <h3>日常の家事</h3>
                     <p>料理、洗濯干し・たたみ、掃除など</p>
                 </div>
-                <div class="service-item">
+                <div class="service-card animate-on-scroll" data-delay="1">
                     <h3>赤ちゃんのお世話</h3>
                     <p>見守り、オムツ交換、沐浴、ミルク、離乳食など</p>
                 </div>
-                <div class="service-item">
+                <div class="service-card animate-on-scroll" data-delay="2">
                     <h3>検診などのお出かけ同行</h3>
                 </div>
-                <div class="service-item">
+                <div class="service-card animate-on-scroll" data-delay="3">
                     <h3>上の子のお世話</h3>
                 </div>
-                <div class="service-item">
+                <div class="service-card animate-on-scroll" data-delay="4">
                     <h3>保育園などの送迎</h3>
                 </div>
-                <div class="service-item">
+                <div class="service-card animate-on-scroll" data-delay="5">
                     <h3>お買い物代行</h3>
                     <p>＊買い物時間はサポート時間に含まれます</p>
                 </div>
             </div>
-            <p class="services-note">＊その他サポート内容も受け付けております、お気軽にご相談ください。</p>
-            <p class="services-note">＊申し訳ございませんが、ハンドマッサージは行っておりません。</p>
-            <p class="services-note">＊送迎、お出かけ同行の際に交通費が発生する場合は、ご利用者様の負担になります。</p>
+            <div class="services-notes animate-on-scroll">
+                <p>＊その他サポート内容も受け付けております、お気軽にご相談ください。</p>
+                <p>＊申し訳ございませんが、ハンドマッサージは行っておりません。</p>
+                <p>＊送迎、お出かけ同行の際に交通費が発生する場合は、ご利用者様の負担になります。</p>
+            </div>
         </div>
     </section>
 
     <!-- ご利用の流れ -->
-    <section class="flow">
+    <section class="section" id="flow">
         <div class="container">
-            <h2>ご利用の流れ</h2>
+            <h2 class="section-heading animate-on-scroll">ご利用の流れ</h2>
             <div class="flow-steps">
-                <div class="step">
-                    <div class="step-number">STEP</div>
+                <div class="flow-step animate-on-scroll">
+                    <div class="flow-number"><span>1</span></div>
                     <h3>お問い合わせ</h3>
                     <p>リンクをクリックしていただき、InstagramからDMをお送りください</p>
                 </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">STEP</div>
+                <div class="flow-connector" aria-hidden="true"></div>
+                <div class="flow-step animate-on-scroll" data-delay="1">
+                    <div class="flow-number"><span>2</span></div>
                     <h3>ご連絡</h3>
                     <p>ドゥーラよりご返信させていただき、訪問日時を決めます。</p>
                 </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">STEP</div>
+                <div class="flow-connector" aria-hidden="true"></div>
+                <div class="flow-step animate-on-scroll" data-delay="2">
+                    <div class="flow-number"><span>3</span></div>
                     <h3>初回ご訪問</h3>
                     <p>産後プランニング（60分）<br>自己紹介、サポート内容の説明、その他サポート内容のご相談など</p>
                 </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">STEP</div>
+                <div class="flow-connector" aria-hidden="true"></div>
+                <div class="flow-step animate-on-scroll" data-delay="3">
+                    <div class="flow-number"><span>4</span></div>
                     <h3>サポート開始</h3>
                 </div>
             </div>
-            <a href="https://www.instagram.com/" target="_blank" class="cta-button">お申し込みはこちら</a>
+            <div class="flow-cta animate-on-scroll">
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="btn">お申し込みはこちら</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- サポート時間 -->
+    <section class="section section--warm" id="schedule">
+        <div class="container container--narrow">
+            <h2 class="section-heading animate-on-scroll">サポート時間</h2>
+            <div class="schedule-card animate-on-scroll">
+                <p class="schedule-days">月・火・水・木・金</p>
+                <p class="schedule-time">9:00 — 17:00</p>
+                <p class="schedule-note">＊その他時間帯は、ご相談ください。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ご予約状況 -->
+    <section class="section" id="availability">
+        <div class="container">
+            <h2 class="section-heading animate-on-scroll">ご予約状況</h2>
+            <div class="avail-week-nav animate-on-scroll">
+                <button class="avail-nav-btn" data-dir="-1" aria-label="前の週">‹</button>
+                <span class="avail-week-label"></span>
+                <button class="avail-nav-btn" data-dir="1" aria-label="次の週">›</button>
+            </div>
+            <div class="avail-grid animate-on-scroll">
+                <!-- JS が描画 -->
+            </div>
+            <div class="avail-legend animate-on-scroll">
+                <span class="avail-legend-item"><span class="avail-dot avail-dot--open"></span>空きあり</span>
+                <span class="avail-legend-item"><span class="avail-dot avail-dot--few"></span>残りわずか</span>
+                <span class="avail-legend-item"><span class="avail-dot avail-dot--closed"></span>予約済み</span>
+            </div>
+            <p class="avail-note animate-on-scroll">＊最新の空き状況はお問い合わせください。</p>
+        </div>
+    </section>
+
+    <!-- ご利用料金 -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <h2 class="section-heading animate-on-scroll">ご利用料金</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card animate-on-scroll">
+                    <h3>産後プランニング</h3>
+                    <div class="pricing-amount">
+                        <span class="pricing-yen">¥</span>2,000<span class="pricing-unit">/1回</span>
+                    </div>
+                </div>
+                <div class="pricing-card pricing-card--featured animate-on-scroll" data-delay="1">
+                    <h3>ドゥーラサポート</h3>
+                    <div class="pricing-amount">
+                        <span class="pricing-yen">¥</span>3,000<span class="pricing-unit">/1時間</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-extra animate-on-scroll">
+                <p>・往復交通費は別途頂戴いたします。</p>
+            </div>
+            <div class="payment-info animate-on-scroll">
+                <h3>お支払い方法</h3>
+                <p>現金、銀行振り込みがご利用出来ます。</p>
+            </div>
         </div>
     </section>
 
     <!-- 助成金・保険 -->
-    <section class="subsidy">
+    <section class="section section--warm" id="subsidy">
         <div class="container">
             <div class="subsidy-grid">
-                <div class="subsidy-card">
+                <div class="subsidy-card animate-on-scroll">
                     <h3>助成金対象自治体</h3>
                     <p>大田区の助成金対象事業者です。</p>
                     <p>ご利用の際は、お知らせください。</p>
                 </div>
-                <div class="subsidy-card">
+                <div class="subsidy-card animate-on-scroll" data-delay="1">
                     <h3>加入保険</h3>
                     <p>万が一に備え、ドゥーラ賠償責任保険に加入しております。</p>
                 </div>
@@ -224,9 +260,151 @@
 
     <!-- フッター -->
     <footer class="footer">
-        <div class="watercolor-blob blob-footer-1"></div>
-        <div class="watercolor-blob blob-footer-2"></div>
+        <div class="footer-ornament" aria-hidden="true">◇</div>
         <p>&copy; 2026 認定産後ドゥーラ 岡田みちこ</p>
     </footer>
+
+    <script>
+        // Scroll-triggered fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    entry.target.style.transitionDelay = `${delay * 120}ms`;
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ==========================================
+        // ご予約状況 — モックデータ版
+        // 本番では Google Calendar API から取得する
+        // ==========================================
+        (() => {
+            const DAY_NAMES = ['日','月','火','水','木','金','土'];
+            const SLOTS = [
+                { key: 'am', label: '午前', time: '9:00–12:00' },
+                { key: 'pm', label: '午後', time: '13:00–17:00' },
+            ];
+            // status: 'open' | 'few' | 'closed'
+            // モックデータ: 今日起点で2週間分を生成
+            function generateMockData() {
+                const data = {};
+                const today = new Date();
+                const patterns = [
+                    // week 0 (今週の残り + 来週)
+                    { am: 'open',   pm: 'open' },
+                    { am: 'closed', pm: 'few' },
+                    { am: 'open',   pm: 'open' },
+                    { am: 'few',    pm: 'closed' },
+                    { am: 'open',   pm: 'open' },
+                    { am: 'closed', pm: 'closed' },
+                    { am: 'open',   pm: 'open' },
+                    { am: 'open',   pm: 'few' },
+                    { am: 'few',    pm: 'open' },
+                    { am: 'open',   pm: 'open' },
+                    { am: 'closed', pm: 'open' },
+                    { am: 'open',   pm: 'closed' },
+                    { am: 'open',   pm: 'open' },
+                    { am: 'few',    pm: 'open' },
+                ];
+                for (let i = 0; i < 14; i++) {
+                    const d = new Date(today);
+                    d.setDate(d.getDate() + i);
+                    const key = d.toISOString().slice(0, 10);
+                    const dow = d.getDay();
+                    // 土日は休み
+                    if (dow === 0 || dow === 6) {
+                        data[key] = { am: 'holiday', pm: 'holiday' };
+                    } else {
+                        data[key] = patterns[i % patterns.length];
+                    }
+                }
+                return data;
+            }
+
+            const mockData = generateMockData();
+            let weekOffset = 0;
+
+            function getMonday(offset) {
+                const d = new Date();
+                const day = d.getDay();
+                const diff = d.getDate() - day + (day === 0 ? -6 : 1) + offset * 7;
+                return new Date(d.getFullYear(), d.getMonth(), diff);
+            }
+
+            function formatDate(d) {
+                return `${d.getMonth() + 1}/${d.getDate()}`;
+            }
+
+            function render() {
+                const monday = getMonday(weekOffset);
+                const sunday = new Date(monday);
+                sunday.setDate(sunday.getDate() + 6);
+
+                // Week label
+                document.querySelector('.avail-week-label').textContent =
+                    `${monday.getFullYear()}年 ${formatDate(monday)}〜${formatDate(sunday)}`;
+
+                const grid = document.querySelector('.avail-grid');
+                const today = new Date().toISOString().slice(0, 10);
+
+                let html = '';
+                // Header row
+                html += '<div class="avail-row avail-row--header">';
+                html += '<div class="avail-cell avail-cell--label"></div>';
+                for (let i = 0; i < 7; i++) {
+                    const d = new Date(monday);
+                    d.setDate(d.getDate() + i);
+                    const dateStr = d.toISOString().slice(0, 10);
+                    const isToday = dateStr === today;
+                    const isWeekend = i >= 5;
+                    html += `<div class="avail-cell avail-cell--day${isToday ? ' is-today' : ''}${isWeekend ? ' is-weekend' : ''}">`;
+                    html += `<span class="avail-day-name">${DAY_NAMES[d.getDay()]}</span>`;
+                    html += `<span class="avail-day-date">${d.getDate()}</span>`;
+                    html += '</div>';
+                }
+                html += '</div>';
+
+                // Slot rows
+                for (const slot of SLOTS) {
+                    html += '<div class="avail-row">';
+                    html += `<div class="avail-cell avail-cell--label"><span>${slot.label}</span><span class="avail-time">${slot.time}</span></div>`;
+                    for (let i = 0; i < 7; i++) {
+                        const d = new Date(monday);
+                        d.setDate(d.getDate() + i);
+                        const dateStr = d.toISOString().slice(0, 10);
+                        const dayData = mockData[dateStr];
+                        const status = dayData ? dayData[slot.key] : 'unknown';
+                        const isWeekend = i >= 5;
+                        const label = status === 'open' ? '◎' : status === 'few' ? '△' : status === 'holiday' ? '—' : '✕';
+                        html += `<div class="avail-cell avail-cell--slot avail-status--${status}${isWeekend ? ' is-weekend' : ''}">${label}</div>`;
+                    }
+                    html += '</div>';
+                }
+
+                grid.innerHTML = html;
+            }
+
+            // Navigation
+            document.querySelectorAll('.avail-nav-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const dir = parseInt(btn.dataset.dir);
+                    weekOffset = Math.max(0, Math.min(1, weekOffset + dir));
+                    render();
+                });
+            });
+
+            render();
+        })();
+    </script>
 </body>
 </html>
