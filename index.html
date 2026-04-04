@@ -209,10 +209,10 @@
     <section class="section" id="availability">
         <div class="container">
             <h2 class="section-heading animate-on-scroll">ご予約状況</h2>
-            <div class="avail-week-nav animate-on-scroll">
-                <button class="avail-nav-btn" data-dir="-1" aria-label="前の週">‹</button>
-                <span class="avail-week-label"></span>
-                <button class="avail-nav-btn" data-dir="1" aria-label="次の週">›</button>
+            <div class="avail-month-nav animate-on-scroll">
+                <button class="avail-nav-btn" data-dir="-1" aria-label="前の月">‹</button>
+                <span class="avail-month-label"></span>
+                <button class="avail-nav-btn" data-dir="1" aria-label="次の月">›</button>
             </div>
             <div class="avail-grid animate-on-scroll">
                 <!-- JS が描画 -->
@@ -281,6 +281,7 @@
     <script>
         // ==========================================
         // ご予約状況 — Google Calendar API 連携
+        // 月カレンダー表示（日曜始まり）
         // カレンダーに「空き」イベントがある枠 = 予約可能
         // ==========================================
         (() => {
@@ -291,20 +292,12 @@
 
             const DAY_NAMES = ['日','月','火','水','木','金','土'];
             const SLOTS = [
-                { key: 'am', label: '午前', time: '9:00–12:00', startHour: 9,  endHour: 12 },
-                { key: 'pm', label: '午後', time: '13:00–19:00', startHour: 13, endHour: 19 },
+                { key: 'am', label: '午前', startHour: 9,  endHour: 12 },
+                { key: 'pm', label: '午後', startHour: 13, endHour: 19 },
             ];
-            const MAX_WEEKS = 2;
 
-            let weekOffset = 0;
+            let monthOffset = 0; // 0 = 今月, 1 = 来月
             let eventsCache = null;
-
-            function getMonday(offset) {
-                const d = new Date();
-                const day = d.getDay();
-                const diff = d.getDate() - day + (day === 0 ? -6 : 1) + offset * 7;
-                return new Date(d.getFullYear(), d.getMonth(), diff);
-            }
 
             function toDateStr(d) {
                 const y = d.getFullYear();
@@ -313,15 +306,16 @@
                 return `${y}-${m}-${dd}`;
             }
 
-            function formatDate(d) {
-                return `${d.getMonth() + 1}/${d.getDate()}`;
+            function getTargetMonth() {
+                const now = new Date();
+                return new Date(now.getFullYear(), now.getMonth() + monthOffset, 1);
             }
 
-            // Google Calendar API からイベント取得（2週間分）
+            // Google Calendar API からイベント取得（2ヶ月分）
             async function fetchEvents() {
-                const timeMin = getMonday(0);
-                const timeMax = new Date(timeMin);
-                timeMax.setDate(timeMax.getDate() + 14);
+                const now = new Date();
+                const timeMin = new Date(now.getFullYear(), now.getMonth(), 1);
+                const timeMax = new Date(now.getFullYear(), now.getMonth() + 2, 0, 23, 59, 59);
 
                 const params = new URLSearchParams({
                     key: API_KEY,
@@ -329,7 +323,7 @@
                     timeMax: timeMax.toISOString(),
                     singleEvents: 'true',
                     orderBy: 'startTime',
-                    maxResults: '200',
+                    maxResults: '500',
                 });
 
                 const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?${params}`;
@@ -339,10 +333,9 @@
                 return data.items || [];
             }
 
-            // イベント一覧 → { '2026-04-07': { am: 'open', pm: 'closed' } } 形式に変換
+            // イベント一覧 → { '2026-04-07': { am: true, pm: false } }
             function buildAvailability(events) {
                 const avail = {};
-
                 for (const ev of events) {
                     const start = new Date(ev.start.dateTime || ev.start.date);
                     const end   = new Date(ev.end.dateTime || ev.end.date);
@@ -351,11 +344,9 @@
                     const endHour   = end.getHours() + (end.getMinutes() > 0 ? 1 : 0);
 
                     if (!avail[dateKey]) avail[dateKey] = {};
-
                     for (const slot of SLOTS) {
-                        // イベントがスロットの時間帯と重なっていれば open
                         if (startHour < slot.endHour && endHour > slot.startHour) {
-                            avail[dateKey][slot.key] = 'open';
+                            avail[dateKey][slot.key] = true;
                         }
                     }
                 }
@@ -363,61 +354,64 @@
             }
 
             function render(availability) {
-                const monday = getMonday(weekOffset);
-                const sunday = new Date(monday);
-                sunday.setDate(sunday.getDate() + 6);
-
-                document.querySelector('.avail-week-label').textContent =
-                    `${monday.getFullYear()}年 ${formatDate(monday)}〜${formatDate(sunday)}`;
-
-                const grid = document.querySelector('.avail-grid');
+                const first = getTargetMonth();
+                const year = first.getFullYear();
+                const month = first.getMonth();
+                const lastDay = new Date(year, month + 1, 0).getDate();
+                const startDow = first.getDay(); // 0=日曜
                 const todayStr = toDateStr(new Date());
 
+                // Month label
+                document.querySelector('.avail-month-label').textContent =
+                    `${year}年${month + 1}月`;
+
+                const grid = document.querySelector('.avail-grid');
                 let html = '';
 
-                // Header row
-                html += '<div class="avail-row avail-row--header">';
-                html += '<div class="avail-cell avail-cell--label"></div>';
-                for (let i = 0; i < 7; i++) {
-                    const d = new Date(monday);
-                    d.setDate(d.getDate() + i);
-                    const dateStr = toDateStr(d);
-                    const isToday = dateStr === todayStr;
-                    const isWeekend = i >= 5;
-                    html += `<div class="avail-cell avail-cell--day${isToday ? ' is-today' : ''}${isWeekend ? ' is-weekend' : ''}">`;
-                    html += `<span class="avail-day-name">${DAY_NAMES[d.getDay()]}</span>`;
-                    html += `<span class="avail-day-date">${d.getDate()}</span>`;
-                    html += '</div>';
+                // Day-of-week header
+                html += '<div class="cal-header">';
+                for (const name of DAY_NAMES) {
+                    html += `<div class="cal-header-cell">${name}</div>`;
                 }
                 html += '</div>';
 
-                // Slot rows
-                for (const slot of SLOTS) {
-                    html += '<div class="avail-row">';
-                    html += `<div class="avail-cell avail-cell--label"><span>${slot.label}</span><span class="avail-time">${slot.time}</span></div>`;
-                    for (let i = 0; i < 7; i++) {
-                        const d = new Date(monday);
-                        d.setDate(d.getDate() + i);
-                        const dateStr = toDateStr(d);
-                        const dow = d.getDay();
-                        const isWeekend = dow === 0 || dow === 6;
+                // Calendar body
+                html += '<div class="cal-body">';
+                // Leading empty cells
+                for (let i = 0; i < startDow; i++) {
+                    html += '<div class="cal-cell cal-cell--empty"></div>';
+                }
+                // Day cells
+                for (let day = 1; day <= lastDay; day++) {
+                    const d = new Date(year, month, day);
+                    const dateStr = toDateStr(d);
+                    const isToday = dateStr === todayStr;
+                    const dayAvail = availability[dateStr] || {};
+                    const amOpen = dayAvail.am === true;
+                    const pmOpen = dayAvail.pm === true;
 
-                        let status, label;
-                        if (isWeekend) {
-                            status = 'holiday';
-                            label = '—';
-                        } else if (availability[dateStr] && availability[dateStr][slot.key] === 'open') {
-                            status = 'open';
-                            label = '◎';
-                        } else {
-                            status = 'closed';
-                            label = '✕';
-                        }
-
-                        html += `<div class="avail-cell avail-cell--slot avail-status--${status}${isWeekend ? ' is-weekend' : ''}">${label}</div>`;
-                    }
+                    html += `<div class="cal-cell${isToday ? ' is-today' : ''}">`;
+                    html += `<span class="cal-date">${day}</span>`;
+                    html += '<div class="cal-slots">';
+                    html += `<span class="cal-slot ${amOpen ? 'cal-slot--open' : 'cal-slot--closed'}" title="午前">${amOpen ? '◎' : '✕'}</span>`;
+                    html += `<span class="cal-slot ${pmOpen ? 'cal-slot--open' : 'cal-slot--closed'}" title="午後">${pmOpen ? '◎' : '✕'}</span>`;
+                    html += '</div>';
                     html += '</div>';
                 }
+                // Trailing empty cells
+                const totalCells = startDow + lastDay;
+                const remainder = totalCells % 7;
+                if (remainder > 0) {
+                    for (let i = 0; i < 7 - remainder; i++) {
+                        html += '<div class="cal-cell cal-cell--empty"></div>';
+                    }
+                }
+                html += '</div>';
+
+                // Slot labels
+                html += '<div class="cal-slot-legend">';
+                html += '<span>◎/✕ = 午前 / 午後</span>';
+                html += '</div>';
 
                 grid.innerHTML = html;
             }
@@ -431,9 +425,9 @@
             document.querySelectorAll('.avail-nav-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const dir = parseInt(btn.dataset.dir);
-                    const next = weekOffset + dir;
-                    if (next >= 0 && next < MAX_WEEKS) {
-                        weekOffset = next;
+                    const next = monthOffset + dir;
+                    if (next >= 0 && next <= 1) {
+                        monthOffset = next;
                         if (eventsCache !== null) {
                             render(eventsCache);
                         }
