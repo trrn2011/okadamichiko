@@ -218,6 +218,20 @@ a {
     padding: 40px var(--container-px);
 }
 
+.hero-profile {
+    margin-bottom: 32px;
+}
+
+.hero-profile-img {
+    width: clamp(140px, 22vw, 200px);
+    height: clamp(140px, 22vw, 200px);
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 15%;
+    box-shadow: 0 8px 32px rgba(107, 76, 66, 0.10);
+    border: 4px solid var(--warm-white);
+}
+
 .hero-greeting {
     font-family: var(--font-body);
     font-weight: 300;
@@ -785,21 +799,12 @@ a {
     color: var(--sage);
 }
 
-.avail-status--few {
-    color: var(--gold);
-}
-
 .avail-status--closed {
     color: var(--brown-light);
     opacity: 0.5;
 }
 
 .avail-status--holiday {
-    color: var(--brown-light);
-    opacity: 0.3;
-}
-
-.avail-status--unknown {
     color: var(--brown-light);
     opacity: 0.3;
 }
@@ -829,10 +834,6 @@ a {
 
 .avail-dot--open {
     background: var(--sage);
-}
-
-.avail-dot--few {
-    background: var(--gold);
 }
 
 .avail-dot--closed {

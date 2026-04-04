@@ -18,11 +18,14 @@
         <div class="hero-orb hero-orb--3"></div>
 
         <div class="hero-content">
-            <p class="hero-greeting animate-on-scroll">こんにちは</p>
-            <p class="hero-title animate-on-scroll" data-delay="1">認定産後ドゥーラ</p>
-            <h1 class="hero-name animate-on-scroll" data-delay="2">岡田みちこ</h1>
-            <div class="hero-line animate-on-scroll" data-delay="3"></div>
-            <a href="https://www.instagram.com/doula.m.okd?igsh=MWx4ZHY5dnA0ZmplMw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn animate-on-scroll" data-delay="4">ご連絡はこちら</a>
+            <div class="hero-profile">
+                <img src="profile.jpg" alt="岡田みちこ" class="hero-profile-img">
+            </div>
+            <p class="hero-greeting">こんにちは</p>
+            <p class="hero-title">認定産後ドゥーラ</p>
+            <h1 class="hero-name">岡田みちこ</h1>
+            <div class="hero-line"></div>
+            <a href="https://www.instagram.com/doula.m.okd?igsh=MWx4ZHY5dnA0ZmplMw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn">ご連絡はこちら</a>
         </div>
 
         <div class="hero-scroll-hint" aria-hidden="true">
@@ -210,9 +213,8 @@
                 <!-- JS が描画 -->
             </div>
             <div class="avail-legend animate-on-scroll">
-                <span class="avail-legend-item"><span class="avail-dot avail-dot--open"></span>空きあり</span>
-                <span class="avail-legend-item"><span class="avail-dot avail-dot--few"></span>残りわずか</span>
-                <span class="avail-legend-item"><span class="avail-dot avail-dot--closed"></span>予約済み</span>
+                <span class="avail-legend-item"><span class="avail-dot avail-dot--open"></span>予約可能</span>
+                <span class="avail-legend-item"><span class="avail-dot avail-dot--closed"></span>予約不可</span>
             </div>
             <p class="avail-note animate-on-scroll">＊最新の空き状況はお問い合わせください。</p>
         </div>
@@ -273,54 +275,24 @@
 
     <script>
         // ==========================================
-        // ご予約状況 — モックデータ版
-        // 本番では Google Calendar API から取得する
+        // ご予約状況 — Google Calendar API 連携
+        // カレンダーに「空き」イベントがある枠 = 予約可能
         // ==========================================
         (() => {
+            // ---- 設定 ----
+            const CALENDAR_ID = 'YOUR_CALENDAR_ID@group.calendar.google.com'; // TODO: 公開カレンダーのID
+            const API_KEY     = 'YOUR_API_KEY';                                // TODO: GCP APIキー
+            // ---- 設定ここまで ----
+
             const DAY_NAMES = ['日','月','火','水','木','金','土'];
             const SLOTS = [
-                { key: 'am', label: '午前', time: '9:00–12:00' },
-                { key: 'pm', label: '午後', time: '13:00–17:00' },
+                { key: 'am', label: '午前', time: '9:00–12:00', startHour: 9,  endHour: 12 },
+                { key: 'pm', label: '午後', time: '13:00–19:00', startHour: 13, endHour: 19 },
             ];
-            // status: 'open' | 'few' | 'closed'
-            // モックデータ: 今日起点で2週間分を生成
-            function generateMockData() {
-                const data = {};
-                const today = new Date();
-                const patterns = [
-                    // week 0 (今週の残り + 来週)
-                    { am: 'open',   pm: 'open' },
-                    { am: 'closed', pm: 'few' },
-                    { am: 'open',   pm: 'open' },
-                    { am: 'few',    pm: 'closed' },
-                    { am: 'open',   pm: 'open' },
-                    { am: 'closed', pm: 'closed' },
-                    { am: 'open',   pm: 'open' },
-                    { am: 'open',   pm: 'few' },
-                    { am: 'few',    pm: 'open' },
-                    { am: 'open',   pm: 'open' },
-                    { am: 'closed', pm: 'open' },
-                    { am: 'open',   pm: 'closed' },
-                    { am: 'open',   pm: 'open' },
-                    { am: 'few',    pm: 'open' },
-                ];
-                for (let i = 0; i < 14; i++) {
-                    const d = new Date(today);
-                    d.setDate(d.getDate() + i);
-                    const key = d.toISOString().slice(0, 10);
-                    const dow = d.getDay();
-                    // 土日は休み
-                    if (dow === 0 || dow === 6) {
-                        data[key] = { am: 'holiday', pm: 'holiday' };
-                    } else {
-                        data[key] = patterns[i % patterns.length];
-                    }
-                }
-                return data;
-            }
+            const MAX_WEEKS = 2;
 
-            const mockData = generateMockData();
             let weekOffset = 0;
+            let eventsCache = null;
 
             function getMonday(offset) {
                 const d = new Date();
@@ -329,31 +301,83 @@
                 return new Date(d.getFullYear(), d.getMonth(), diff);
             }
 
+            function toDateStr(d) {
+                const y = d.getFullYear();
+                const m = String(d.getMonth() + 1).padStart(2, '0');
+                const dd = String(d.getDate()).padStart(2, '0');
+                return `${y}-${m}-${dd}`;
+            }
+
             function formatDate(d) {
                 return `${d.getMonth() + 1}/${d.getDate()}`;
             }
 
-            function render() {
+            // Google Calendar API からイベント取得（2週間分）
+            async function fetchEvents() {
+                const timeMin = getMonday(0);
+                const timeMax = new Date(timeMin);
+                timeMax.setDate(timeMax.getDate() + 14);
+
+                const params = new URLSearchParams({
+                    key: API_KEY,
+                    timeMin: timeMin.toISOString(),
+                    timeMax: timeMax.toISOString(),
+                    singleEvents: 'true',
+                    orderBy: 'startTime',
+                    maxResults: '200',
+                });
+
+                const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?${params}`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error(`Calendar API error: ${res.status}`);
+                const data = await res.json();
+                return data.items || [];
+            }
+
+            // イベント一覧 → { '2026-04-07': { am: 'open', pm: 'closed' } } 形式に変換
+            function buildAvailability(events) {
+                const avail = {};
+
+                for (const ev of events) {
+                    const start = new Date(ev.start.dateTime || ev.start.date);
+                    const end   = new Date(ev.end.dateTime || ev.end.date);
+                    const dateKey = toDateStr(start);
+                    const startHour = start.getHours();
+                    const endHour   = end.getHours() + (end.getMinutes() > 0 ? 1 : 0);
+
+                    if (!avail[dateKey]) avail[dateKey] = {};
+
+                    for (const slot of SLOTS) {
+                        // イベントがスロットの時間帯と重なっていれば open
+                        if (startHour < slot.endHour && endHour > slot.startHour) {
+                            avail[dateKey][slot.key] = 'open';
+                        }
+                    }
+                }
+                return avail;
+            }
+
+            function render(availability) {
                 const monday = getMonday(weekOffset);
                 const sunday = new Date(monday);
                 sunday.setDate(sunday.getDate() + 6);
 
-                // Week label
                 document.querySelector('.avail-week-label').textContent =
                     `${monday.getFullYear()}年 ${formatDate(monday)}〜${formatDate(sunday)}`;
 
                 const grid = document.querySelector('.avail-grid');
-                const today = new Date().toISOString().slice(0, 10);
+                const todayStr = toDateStr(new Date());
 
                 let html = '';
+
                 // Header row
                 html += '<div class="avail-row avail-row--header">';
                 html += '<div class="avail-cell avail-cell--label"></div>';
                 for (let i = 0; i < 7; i++) {
                     const d = new Date(monday);
                     d.setDate(d.getDate() + i);
-                    const dateStr = d.toISOString().slice(0, 10);
-                    const isToday = dateStr === today;
+                    const dateStr = toDateStr(d);
+                    const isToday = dateStr === todayStr;
                     const isWeekend = i >= 5;
                     html += `<div class="avail-cell avail-cell--day${isToday ? ' is-today' : ''}${isWeekend ? ' is-weekend' : ''}">`;
                     html += `<span class="avail-day-name">${DAY_NAMES[d.getDay()]}</span>`;
@@ -369,11 +393,22 @@
                     for (let i = 0; i < 7; i++) {
                         const d = new Date(monday);
                         d.setDate(d.getDate() + i);
-                        const dateStr = d.toISOString().slice(0, 10);
-                        const dayData = mockData[dateStr];
-                        const status = dayData ? dayData[slot.key] : 'unknown';
-                        const isWeekend = i >= 5;
-                        const label = status === 'open' ? '◎' : status === 'few' ? '△' : status === 'holiday' ? '—' : '✕';
+                        const dateStr = toDateStr(d);
+                        const dow = d.getDay();
+                        const isWeekend = dow === 0 || dow === 6;
+
+                        let status, label;
+                        if (isWeekend) {
+                            status = 'holiday';
+                            label = '—';
+                        } else if (availability[dateStr] && availability[dateStr][slot.key] === 'open') {
+                            status = 'open';
+                            label = '◎';
+                        } else {
+                            status = 'closed';
+                            label = '✕';
+                        }
+
                         html += `<div class="avail-cell avail-cell--slot avail-status--${status}${isWeekend ? ' is-weekend' : ''}">${label}</div>`;
                     }
                     html += '</div>';
@@ -382,16 +417,36 @@
                 grid.innerHTML = html;
             }
 
+            function renderError() {
+                const grid = document.querySelector('.avail-grid');
+                grid.innerHTML = '<p style="text-align:center;padding:32px;color:var(--brown-light);font-size:0.9rem;">カレンダー情報を取得できませんでした。<br>お手数ですがお問い合わせください。</p>';
+            }
+
             // Navigation
             document.querySelectorAll('.avail-nav-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const dir = parseInt(btn.dataset.dir);
-                    weekOffset = Math.max(0, Math.min(1, weekOffset + dir));
-                    render();
+                    const next = weekOffset + dir;
+                    if (next >= 0 && next < MAX_WEEKS) {
+                        weekOffset = next;
+                        if (eventsCache !== null) {
+                            render(eventsCache);
+                        }
+                    }
                 });
             });
 
-            render();
+            // 初期化
+            (async () => {
+                try {
+                    const events = await fetchEvents();
+                    eventsCache = buildAvailability(events);
+                    render(eventsCache);
+                } catch (e) {
+                    console.error('Availability fetch failed:', e);
+                    renderError();
+                }
+            })();
         })();
     </script>
 </body>
