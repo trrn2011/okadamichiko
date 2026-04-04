@@ -193,7 +193,7 @@
         <div class="container container--narrow">
             <h2 class="section-heading animate-on-scroll">サポート時間・訪問エリア</h2>
             <div class="schedule-card animate-on-scroll">
-                <p class="schedule-days">月・火・水・木・金</p>
+                <p class="schedule-days">月・火・木・金</p>
                 <p class="schedule-time">9:00 — 19:00</p>
                 <p class="schedule-note">＊その他時間帯は、ご相談ください。</p>
             </div>
@@ -358,10 +358,9 @@
                 const year = first.getFullYear();
                 const month = first.getMonth();
                 const lastDay = new Date(year, month + 1, 0).getDate();
-                const startDow = first.getDay(); // 0=日曜
+                const startDow = first.getDay();
                 const todayStr = toDateStr(new Date());
 
-                // Month label
                 document.querySelector('.avail-month-label').textContent =
                     `${year}年${month + 1}月`;
 
@@ -377,11 +376,9 @@
 
                 // Calendar body
                 html += '<div class="cal-body">';
-                // Leading empty cells
                 for (let i = 0; i < startDow; i++) {
                     html += '<div class="cal-cell cal-cell--empty"></div>';
                 }
-                // Day cells
                 for (let day = 1; day <= lastDay; day++) {
                     const d = new Date(year, month, day);
                     const dateStr = toDateStr(d);
@@ -398,7 +395,6 @@
                     html += '</div>';
                     html += '</div>';
                 }
-                // Trailing empty cells
                 const totalCells = startDow + lastDay;
                 const remainder = totalCells % 7;
                 if (remainder > 0) {
