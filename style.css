@@ -221,16 +221,17 @@ a {
 .hero-photos {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
     margin-bottom: 32px;
+    flex-wrap: nowrap;
 }
 
 .hero-profile {
 }
 
 .hero-profile-img {
-    width: clamp(140px, 22vw, 200px);
-    height: clamp(140px, 22vw, 200px);
+    width: clamp(120px, 18vw, 200px);
+    height: clamp(120px, 18vw, 200px);
     border-radius: 50%;
     object-fit: cover;
     object-position: center 15%;
