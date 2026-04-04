@@ -38,6 +38,26 @@
         </div>
     </header>
 
+    <!-- ご予約状況 -->
+    <section class="section" id="availability">
+        <div class="container">
+            <h2 class="section-heading animate-on-scroll">ご予約状況</h2>
+            <div class="avail-month-nav animate-on-scroll">
+                <button class="avail-nav-btn" data-dir="-1" aria-label="前の月">‹</button>
+                <span class="avail-month-label"></span>
+                <button class="avail-nav-btn" data-dir="1" aria-label="次の月">›</button>
+            </div>
+            <div class="avail-grid animate-on-scroll">
+                <!-- JS が描画 -->
+            </div>
+            <div class="avail-legend animate-on-scroll">
+                <span class="avail-legend-item"><span class="avail-dot avail-dot--open"></span>予約可能</span>
+                <span class="avail-legend-item"><span class="avail-dot avail-dot--closed"></span>予約不可</span>
+            </div>
+            <p class="avail-note animate-on-scroll">＊最新の空き状況はお問い合わせください。</p>
+        </div>
+    </section>
+
     <!-- お祝いメッセージ -->
     <section class="section section--warm" id="message">
         <div class="container container--narrow">
@@ -202,26 +222,6 @@
                 <p class="schedule-time" style="font-size: clamp(1.4rem, 3vw, 1.8rem);">大田区</p>
                 <p class="schedule-note">＊その他エリアもご相談ください。</p>
             </div>
-        </div>
-    </section>
-
-    <!-- ご予約状況 -->
-    <section class="section" id="availability">
-        <div class="container">
-            <h2 class="section-heading animate-on-scroll">ご予約状況</h2>
-            <div class="avail-month-nav animate-on-scroll">
-                <button class="avail-nav-btn" data-dir="-1" aria-label="前の月">‹</button>
-                <span class="avail-month-label"></span>
-                <button class="avail-nav-btn" data-dir="1" aria-label="次の月">›</button>
-            </div>
-            <div class="avail-grid animate-on-scroll">
-                <!-- JS が描画 -->
-            </div>
-            <div class="avail-legend animate-on-scroll">
-                <span class="avail-legend-item"><span class="avail-dot avail-dot--open"></span>予約可能</span>
-                <span class="avail-legend-item"><span class="avail-dot avail-dot--closed"></span>予約不可</span>
-            </div>
-            <p class="avail-note animate-on-scroll">＊最新の空き状況はお問い合わせください。</p>
         </div>
     </section>
 
