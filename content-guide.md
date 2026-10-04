@@ -24,8 +24,8 @@ index.html の掲載内容と同期させて管理します（最終更新: 2026
 
 | ボタン | スタイル | リンク先 |
 |-------|---------|---------|
-| Instagram DMはこちら | 白抜き（アウトライン） | https://www.instagram.com/doula.m.okd |
-| メールで問い合わせ | 塗りつぶし（メイン） | mailto:d.okamichi110@gmail.com |
+| メールで問い合わせ | 塗りつぶし（メイン・左） | mailto:d.okamichi110@gmail.com |
+| Instagram DMはこちら | 白抜き（アウトライン・右） | https://www.instagram.com/doula.m.okd |
 
 ---
 
@@ -138,7 +138,7 @@ index.html の掲載内容と同期させて管理します（最終更新: 2026
 | 4 | サポート開始 | — |
 
 **CTAボタン**
-> ヒーローセクションと同じ2ボタン（Instagram DMはこちら / メールで問い合わせ）
+> ヒーローセクションと同じ2ボタン（メールで問い合わせ / Instagram DMはこちら）
 
 ---
 
