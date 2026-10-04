@@ -307,18 +307,14 @@ a {
     transform: translateY(0);
 }
 
-.btn--outline {
-    background: transparent;
-    color: var(--rose);
-    border: 1.5px solid var(--rose);
-    box-shadow: none;
+.btn--dark {
+    background: var(--terracotta);
+    color: var(--warm-white);
 }
 
-.btn--outline:hover {
-    background: var(--rose-pale);
-    color: var(--terracotta);
-    border-color: var(--terracotta);
-    box-shadow: none;
+.btn--dark:hover {
+    background: var(--brown);
+    box-shadow: 0 8px 32px rgba(107, 76, 66, 0.30);
 }
 
 .flow-cta-buttons {
@@ -813,6 +809,8 @@ a {
 .cal-slot--open {
     color: var(--sage);
     background: rgba(143, 165, 128, 0.1);
+    font-weight: 700;
+    font-size: 0.8rem;
 }
 
 .cal-slot--closed {
@@ -847,20 +845,20 @@ a {
     color: var(--brown-light);
 }
 
-.avail-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+.avail-mark {
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1;
     flex-shrink: 0;
 }
 
-.avail-dot--open {
-    background: var(--sage);
+.avail-mark--open {
+    color: var(--sage);
 }
 
-.avail-dot--closed {
-    background: var(--brown-light);
-    opacity: 0.4;
+.avail-mark--closed {
+    color: var(--brown-light);
+    opacity: 0.6;
 }
 
 .avail-note {
@@ -901,6 +899,10 @@ a {
         width: 16px;
         height: 15px;
         border-radius: 2px;
+    }
+
+    .cal-slot--open {
+        font-size: 0.7rem;
     }
 
     .cal-slots {
@@ -1029,6 +1031,34 @@ a {
 .payment-info p {
     color: var(--brown-medium);
     font-size: 0.9rem;
+}
+
+.cancel-policy {
+    background: var(--warm-white);
+    border: 1.5px solid var(--rose-pale);
+    border-radius: 16px;
+    padding: 28px 32px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cancel-policy h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--brown-dark);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+}
+
+.cancel-policy p {
+    color: var(--brown-medium);
+    font-size: 0.9rem;
+    line-height: 1.9;
+}
+
+.cancel-policy p + p {
+    margin-top: 4px;
 }
 
 /* ============================================

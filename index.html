@@ -32,7 +32,7 @@
             <div class="hero-line"></div>
             <div class="flow-cta-buttons">
                 <a href="https://www.instagram.com/doula.m.okd?igsh=MWx4ZHY5dnA0ZmplMw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn">Instagram DMはこちら</a>
-                <a href="mailto:d.okamichi110@gmail.com" class="btn btn--outline">メールで問い合わせ</a>
+                <a href="mailto:d.okamichi110@gmail.com" class="btn btn--dark">メールで問い合わせ</a>
             </div>
         </div>
 
@@ -54,8 +54,8 @@
                 <!-- JS が描画 -->
             </div>
             <div class="avail-legend animate-on-scroll">
-                <span class="avail-legend-item"><span class="avail-dot avail-dot--open"></span>予約可能</span>
-                <span class="avail-legend-item"><span class="avail-dot avail-dot--closed"></span>予約不可</span>
+                <span class="avail-legend-item"><span class="avail-mark avail-mark--open">○</span>予約可能</span>
+                <span class="avail-legend-item"><span class="avail-mark avail-mark--closed">✕</span>予約不可</span>
             </div>
             <p class="avail-note animate-on-scroll">＊最新の空き状況はお問い合わせください。</p>
         </div>
@@ -137,6 +137,7 @@
                 <li class="animate-on-scroll">保育士</li>
                 <li class="animate-on-scroll" data-delay="1">救命救急技能認定</li>
                 <li class="animate-on-scroll" data-delay="2">放課後児童支援員</li>
+                <li class="animate-on-scroll" data-delay="3">離乳食アドバイザー</li>
             </ul>
         </div>
     </section>
@@ -202,7 +203,7 @@
             <div class="flow-cta animate-on-scroll">
                 <div class="flow-cta-buttons">
                     <a href="https://www.instagram.com/doula.m.okd?igsh=MWx4ZHY5dnA0ZmplMw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn">Instagram DMはこちら</a>
-                    <a href="mailto:d.okamichi110@gmail.com" class="btn btn--outline">メールで問い合わせ</a>
+                    <a href="mailto:d.okamichi110@gmail.com" class="btn btn--dark">メールで問い合わせ</a>
                 </div>
             </div>
         </div>
@@ -219,7 +220,7 @@
             </div>
             <div class="schedule-card animate-on-scroll" data-delay="1" style="margin-top: 20px;">
                 <p class="schedule-days">訪問可能エリア</p>
-                <p class="schedule-time" style="font-size: clamp(1.4rem, 3vw, 1.8rem);">大田区</p>
+                <p class="schedule-time" style="font-size: clamp(1.4rem, 3vw, 1.8rem);">大田区・港区・品川区</p>
                 <p class="schedule-note">＊その他エリアもご相談ください。</p>
             </div>
         </div>
@@ -250,7 +251,12 @@
             </div>
             <div class="payment-info animate-on-scroll">
                 <h3>お支払い方法</h3>
-                <p>現金、銀行振り込みがご利用出来ます。</p>
+                <p>現金、銀行振り込み、PayPayがご利用出来ます。</p>
+            </div>
+            <div class="cancel-policy animate-on-scroll" data-delay="1">
+                <h3>予約変更・キャンセルについて</h3>
+                <p>前日17時以降の予約変更やキャンセルについては、キャンセル料として1時間分の料金を徴収させていただいております。</p>
+                <p>お早めのご連絡をお願いいたします。</p>
             </div>
         </div>
     </section>
@@ -261,7 +267,7 @@
             <div class="subsidy-grid">
                 <div class="subsidy-card animate-on-scroll">
                     <h3>助成金対象自治体</h3>
-                    <p>大田区の助成金対象事業者です。</p>
+                    <p>大田区・港区・品川区の助成金対象事業者です。</p>
                     <p>ご利用の際は、お知らせください。</p>
                 </div>
                 <div class="subsidy-card animate-on-scroll" data-delay="1">
@@ -390,8 +396,8 @@
                     html += `<div class="cal-cell${isToday ? ' is-today' : ''}">`;
                     html += `<span class="cal-date">${day}</span>`;
                     html += '<div class="cal-slots">';
-                    html += `<span class="cal-slot ${amOpen ? 'cal-slot--open' : 'cal-slot--closed'}" title="午前">${amOpen ? '◎' : '✕'}</span>`;
-                    html += `<span class="cal-slot ${pmOpen ? 'cal-slot--open' : 'cal-slot--closed'}" title="午後">${pmOpen ? '◎' : '✕'}</span>`;
+                    html += `<span class="cal-slot ${amOpen ? 'cal-slot--open' : 'cal-slot--closed'}" title="午前">${amOpen ? '○' : '✕'}</span>`;
+                    html += `<span class="cal-slot ${pmOpen ? 'cal-slot--open' : 'cal-slot--closed'}" title="午後">${pmOpen ? '○' : '✕'}</span>`;
                     html += '</div>';
                     html += '</div>';
                 }
